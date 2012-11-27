@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]
 then
-  echo "Error: no directory specified"
+  echo "Error: incorrect argument count (you should only specify a directory)"
   exit 1
 fi
 

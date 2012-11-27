@@ -555,6 +555,7 @@
 		25FBB854159272DD00955D27 /* RKRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FBB851159272DD00955D27 /* RKRouter.m */; };
 		25FBB855159272DD00955D27 /* RKRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FBB851159272DD00955D27 /* RKRouter.m */; };
 		36F3D0E4FD7C4C4AA2B4FEB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C87FF6727A42D68CA2220E /* libPods.a */; };
+		55067E0B1664E6E800738A18 /* RKObjectParameterization.h in Headers */ = {isa = PBXBuildFile; fileRef = 254372A615F54995006E8424 /* RKObjectParameterization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5738A4C11A81415DBD72C58B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04014C1F2EA945798F953D38 /* libPods.a */; };
 		5C927E141608FFFD00DC8B07 /* RKDictionaryUtilitiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C927E131608FFFD00DC8B07 /* RKDictionaryUtilitiesTest.m */; };
 		5C927E151608FFFD00DC8B07 /* RKDictionaryUtilitiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C927E131608FFFD00DC8B07 /* RKDictionaryUtilitiesTest.m */; };
@@ -1779,6 +1780,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55067E0B1664E6E800738A18 /* RKObjectParameterization.h in Headers */,
 				25160EE31456532C0060A5C5 /* lcl_RK.h in Headers */,
 				25160EF91456532C0060A5C5 /* LCLNSLog_RK.h in Headers */,
 				25160F091456532C0060A5C5 /* SOCKit.h in Headers */,
@@ -1925,6 +1927,7 @@
 				25160E5E145651060060A5C5 /* Frameworks */,
 				25160E5F145651060060A5C5 /* Headers */,
 				25160E60145651060060A5C5 /* Resources */,
+				55067E091664E6C400738A18 /* Frameworkize Headers */,
 			);
 			buildRules = (
 			);
@@ -2144,6 +2147,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		55067E091664E6C400738A18 /* Frameworkize Headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Frameworkize Headers";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\nheaders_dir=\"$BUILT_PRODUCTS_DIR/RestKit.framework/Headers\"\n\"$SRCROOT/Resources/frameworkize_headers.sh\" \"$headers_dir\"";
 		};
 		91F9BFD4685A46128EAED847 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

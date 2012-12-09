@@ -154,19 +154,19 @@ extern NSString * const RKObjectMappingNestingAttributeKeyName;
     NSDictionary *entityIdentifierAttributes = RKEntityIdentificationAttributesForEntityMappingWithRepresentation(entityMapping, representation);
     if (! self.managedObjectCache) {
         RKLogWarning(@"Performing managed object mapping with a nil managed object cache:\n"
-                      "Unable to update existing object instances by primary key. Duplicate objects may be created.");
+                      "Unable to update existing object instances by identification attributes. Duplicate objects may be created.");
     }
 
     // If we have found the entity identifier attributes, try to find an existing instance to update
     NSEntityDescription *entity = [entityMapping entity];
     NSManagedObject *managedObject = nil;
     if ([entityIdentifierAttributes count]) {
-        NSArray *objects = [self.managedObjectCache managedObjectsWithEntity:entity
-                                                             attributeValues:entityIdentifierAttributes
-                                                      inManagedObjectContext:self.managedObjectContext];
-        if (entityMapping.identificationPredicate) objects = [objects filteredArrayUsingPredicate:entityMapping.identificationPredicate];
+        NSSet *objects = [self.managedObjectCache managedObjectsWithEntity:entity
+                                                           attributeValues:entityIdentifierAttributes
+                                                    inManagedObjectContext:self.managedObjectContext];
+        if (entityMapping.identificationPredicate) objects = [objects filteredSetUsingPredicate:entityMapping.identificationPredicate];
         if ([objects count] > 0) {
-            managedObject = objects[0];
+            managedObject = [objects anyObject];
             if ([objects count] > 1) RKLogWarning(@"Managed object cache returned %ld objects for the identifier configured for the '%@' entity, expected 1.", (long) [objects count], [entity name]);
         }
         if (managedObject && [self.managedObjectCache respondsToSelector:@selector(didFetchObject:)]) {

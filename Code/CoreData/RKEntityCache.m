@@ -128,13 +128,6 @@
 - (void)addObject:(NSManagedObject *)object
 {
     NSAssert(object, @"Cannot add a nil object to the cache");
-    
-    [object.managedObjectContext performBlockAndWait:
-        ^{
-            if ([[object objectID] isTemporaryID])
-                [object.managedObjectContext obtainPermanentIDsForObjects: @[object] error: nil];
-        }];
-    
     NSArray *attributeCaches = [self attributeCachesForEntity:object.entity];
     for (RKEntityByAttributeCache *cache in attributeCaches) {
         [cache addObject:object];

@@ -300,10 +300,6 @@ static NSArray *RKCacheKeysForEntityFromAttributeValues(NSEntityDescription *ent
     [object.managedObjectContext performBlockAndWait:^{
         entity = object.entity;
         objectID = [object objectID];
-        
-        if ([objectID isTemporaryID])
-            RKLogWarning(@"Inserting temporary object into the cache!");
-        
         attributeValues = [object dictionaryWithValuesForKeys:self.attributes];
     }];
     NSAssert([entity isKindOfEntity:self.entity], @"Cannot add object with entity '%@' to cache for entity of '%@'", [entity name], [self.entity name]);
